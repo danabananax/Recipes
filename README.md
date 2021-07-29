@@ -1,6 +1,6 @@
 # Recipes
 Web app allowing users to login, view, create, edit, and delete recipes. This is a personal project for fun build on top of React/Firebase.
-
+Requires a local environment file for firebase config.
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
