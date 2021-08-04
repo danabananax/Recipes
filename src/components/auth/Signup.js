@@ -6,27 +6,37 @@ import AuthInput from './AuthInput'
 import validateAuthInputs from '../../helper';
 
 const Signup = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confPassword, setConfPassword] = useState('');
+    const [inputs, setInputs] = useState({
+        email: 'haha',
+        password: '',
+        confPassword: ''
+    });
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
     const [signupErr, setSignupErr] = useState(null);
     const { signup, currentUser } = useAuth()
 
     const handleSubmit = e => {
+        setLoading(true)
         setSignupErr(null)
         e.preventDefault()
         setError(null);
         try {
-            setLoading(true)
-            validateAuthInputs(email, password, confPassword)
-            signup(email, password)
-                .catch(error => setSignupErr(error.message))
+            validateAuthInputs(inputs['email'], inputs['password'], inputs['confPassword'])
+            signup(inputs['email'], inputs['password'])
+                .catch(error => {
+                    setSignupErr(error.message)
+                    setLoading(false)})
         } catch (error) {
             setError(error.message)
         }
         setLoading(false);
+    }
+
+    const onChange = (name, value) => {
+        const newState = {...inputs}
+        newState[name] = value
+        setInputs(newState);
     }
 
     return currentUser ? <Redirect to='/home'/> : (
@@ -34,39 +44,41 @@ const Signup = () => {
             container
             direction='column'
             justifyContent='center'
-            alignItems='stretch'
-            spacing={6}>
+            spacing={4}>
             <Grid item>
-                <Typography variant='h4'>Signup</Typography>
+                <Typography variant='h4'>Sign up</Typography>
                 {signupErr && <Typography>{signupErr}</Typography>}
             </Grid>
             <AuthInput 
                 id="email-signup" 
                 label="Email" 
-                value={email}
+                value={inputs.email}
                 type="email"
-                onChange={e => setEmail(e.target.value)} 
+                name="email"
+                onChange={e => onChange('email', e.target.value)} 
                 onFocus={() => setError(false)}
                 error={error === 'email'}
-                helper={error === 'email'?'Please use a valid email.':' '}/>
+                helper={error === 'email'?'Please use a valid email.':''}/>
             <AuthInput 
                 id="password-signup" 
                 label="Password" 
-                value={password}
+                value={inputs.password}
                 type="password" 
-                onChange={e => setPassword(e.target.value)}
+                name="password"
+                onChange={e => onChange('password', e.target.value)}
                 onFocus={() => setError(false)}
                 error={error==='password'}
-                helper={error === 'password' ? 'Passwords arent matching.' : ' '}/>
+                helper={error === 'password' ? 'Passwords arent matching.' : ''}/>
             <AuthInput 
                 id="conf-password-signup" 
                 label="Confirm password" 
-                value={confPassword}
+                value={inputs.confPassword}
                 type="password"
-                onChange={e => setConfPassword(e.target.value)}
+                name="confPassword"
+                onChange={e => onChange('confPassword', e.target.value)}
                 onFocus={() => setError(false)}
                 error={error==='password'}
-                helper={error === 'password' ? 'Passwords arent matching.' : ' '}/>
+                helper={error === 'password' ? 'Passwords arent matching.' : ''}/>
             <Grid item>
                 {loading ? <CircularProgress color='primary' /> :
                     <Button 
@@ -75,6 +87,7 @@ const Signup = () => {
                         type='submit' 
                         onClick={loading ? undefined : handleSubmit}
                         disabled={loading}
+                        size='large'
                         >
                             Signup
                     </Button>

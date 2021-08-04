@@ -4,4 +4,16 @@ const validateAuthInputs = (email, password, confPassword=null) => {
     if(confPassword && password !== confPassword) throw new Error('password');
 }
 
+export const containerVariants = {
+    hidden: {
+        opacity: 0,
+    },
+    visible: {
+        opacity: 1,
+        transition: {
+            delay: 1
+        }
+    }
+};
+
 export default validateAuthInputs

@@ -14,10 +14,10 @@ const App = () => {
             {!authvals?.currentUser ? <Redirect to="/auth/signup"/> : <Home/>}
             <Switch>
               <Route path="/auth">
-                <Auth />
+                  <Auth/>
               </Route>
               <Route path="/home">
-                <Home />
+                  <Home/>
               </Route>
             </Switch>
           </AuthProvider>

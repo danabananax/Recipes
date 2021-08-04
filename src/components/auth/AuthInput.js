@@ -2,7 +2,10 @@ import { Grid, TextField, makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
     input: {
-        width: '60%'
+        [theme.breakpoints.down('sm')]: {
+            width: '80%'
+        },
+        width: '60%',
     },
 }));
 
@@ -10,7 +13,7 @@ const AuthInput = props => {
         const classes = useStyles();
         const { id, label, type, onChange, error, helper, onFocus} = props;
         return (
-            <Grid item>
+            <Grid item className={classes.gridItem}>
                 <TextField
                     id={id}
                     size="medium"
