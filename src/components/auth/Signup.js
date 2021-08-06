@@ -7,7 +7,7 @@ import validateAuthInputs from '../../helper';
 
 const Signup = () => {
     const [inputs, setInputs] = useState({
-        email: 'haha',
+        email: '',
         password: '',
         confPassword: ''
     });
