@@ -26,6 +26,7 @@ export function AuthProvider({ children }) {
     signup,
     login,
     signout,
+    loading,
   };
 
   return (
@@ -36,5 +37,5 @@ export function AuthProvider({ children }) {
 }
 
 AuthProvider.propTypes = {
-  children: PropTypes.objectOf(PropTypes.node).isRequired,
+  children: PropTypes.node.isRequired,
 };

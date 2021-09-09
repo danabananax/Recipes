@@ -22,6 +22,15 @@ const useStyles = makeStyles((theme) => ({
   appbar: {
     position: 'relative',
   },
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 0,
+    margin: 0,
+    width: '100%',
+  },
   appBarItem: {
     color: '#fff',
   },
@@ -48,7 +57,8 @@ const AddRecipe = (props) => {
   const [severity, setSeverity] = useState('error');
   const handleTextInput = (e) => { setRecipeName(e.target.value); };
 
-  const handleAddRecipe = () => {
+  const handleAddRecipe = (e) => {
+    e.preventDefault();
     setLoading(true);
     try {
       const recipeObj = {
@@ -95,23 +105,26 @@ const AddRecipe = (props) => {
         alignItems="center"
         className={classes.container}
       >
-        <TextField
-          className={classes.gridItem}
-          value={recipeName}
-          id="GenericText"
-          label="Random word"
-          variant="filled"
-          onChange={handleTextInput}
-        />
-        {loading
-          ? <CircularProgress className={classes.gridItem} />
-          : (
-            <Button className={classes.gridItem} color="secondary" variant="contained" size="large" onClick={handleAddRecipe}>
-              Add Generic Recipe
-            </Button>
-          )}
+        <form onSubmit={handleAddRecipe} className={classes.form}>
+          <TextField
+            className={classes.gridItem}
+            value={recipeName}
+            id="GenericText"
+            label="Random word"
+            variant="filled"
+            onChange={handleTextInput}
+          />
+
+          {loading
+            ? <CircularProgress className={classes.gridItem} />
+            : (
+              <Button className={classes.gridItem} color="secondary" variant="contained" size="large" type="submit">
+                Add Generic Recipe
+              </Button>
+            )}
+        </form>
         <Snackbar open={!!added} autoHideDuration={3000} onClose={handleCloseSnackbar}>
-          <Alert severity={severity} onClose={handleCloseSnackbar}>
+          <Alert severity={severity} variant="filled" onClose={handleCloseSnackbar}>
             {severity === 'success' ? 'Successfully added recipe' : 'Something went wrong'}
           </Alert>
         </Snackbar>

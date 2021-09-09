@@ -1,11 +1,12 @@
 import React from 'react';
 import { useRouteMatch, Route, Switch } from 'react-router-dom';
-import { Grid, makeStyles, Paper } from '@material-ui/core';
+import { Grid, makeStyles } from '@material-ui/core';
 import Signup from './Signup';
 import Login from './Login';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    backgroundColor: theme.palette.secondary.main,
     margin: 0,
     minHeight: '100vh',
     maxWidth: '100%',
@@ -61,7 +62,7 @@ const Auth = () => {
         align="center"
         className={classes.item}
       >
-        <Paper
+        <div
           className={classes.paper}
         >
           <form className={classes.form}>
@@ -74,7 +75,7 @@ const Auth = () => {
               </Route>
             </Switch>
           </form>
-        </Paper>
+        </div>
       </Grid>
     </Grid>
   );

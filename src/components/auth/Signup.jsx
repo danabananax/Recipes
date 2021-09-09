@@ -19,21 +19,21 @@ const Signup = () => {
   const { signup, currentUser } = useAuth();
 
   const handleSubmit = (e) => {
+    e.preventDefault();
     setLoading(true);
     setSignupErr(null);
-    e.preventDefault();
     setError(null);
     try {
       validateAuthInputs(inputs.email, inputs.password, inputs.confPassword);
       signup(inputs.email, inputs.password)
-        .catch(() => {
-          setSignupErr(error.message);
+        .catch((firebaseSignupErr) => {
+          setSignupErr(firebaseSignupErr.message);
           setLoading(false);
         });
     } catch (submitErr) {
       setError(submitErr.message);
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const onChange = (name, value) => {
@@ -103,8 +103,7 @@ const Signup = () => {
       </Grid>
       <Grid item>
         <Typography>
-          Already have an account?
-          {' '}
+          Already have an account?&nbsp;
           <Link to="/auth/login">Login.</Link>
         </Typography>
       </Grid>

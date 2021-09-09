@@ -20,6 +20,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
+    setLoginErr(false);
     setError(null);
     try {
       validateAuthInputs(inputs.email, inputs.password);
