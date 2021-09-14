@@ -13,6 +13,14 @@ const theme = createTheme({
       dark: '#c2c2c2',
     },
   },
+  typography: {
+    h2: {
+      fontSize: '3.75rem',
+      '@media (max-width: 876px)': {
+        fontSize: '2.5rem',
+      },
+    },
+  },
 });
 
 export default theme;

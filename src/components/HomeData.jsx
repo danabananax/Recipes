@@ -1,29 +1,36 @@
 import React from 'react';
 import {
   Typography,
-  Card,
   Button,
   makeStyles,
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { useAuth } from '../contexts/AuthContext';
+import RecipeBubble from './RecipeBubble';
 
 const useStyles = makeStyles((theme) => ({
-  bold: {
-    fontWeight: 500,
+  root: {
+    [theme.breakpoints.down('sm')]: {
+      padding: '2em',
+      textAlign: 'center',
+    },
   },
-  recipeCard: {
-    marginTop: theme.spacing(2),
-    marginRight: theme.spacing(2),
-    padding: theme.spacing(2),
+  responsiveBold: {
+    fontWeight: 500,
+    overflow: 'clip',
+    textOverflow: 'ellipsis',
   },
   recipeContainer: {
     display: 'flex',
+    flexFlow: 'row wrap',
+    [theme.breakpoints.down('sm')]: {
+      flexFlow: 'column nowrap',
+      alignItems: 'center',
+    },
   },
   topSpacing: {
     marginTop: theme.spacing(2),
     marginRight: theme.spacing(2),
-    marginBottom: theme.spacing(2),
   },
 }));
 
@@ -31,8 +38,8 @@ const HomeData = ({ handleOpen, recipeList }) => {
   const { currentUser, signout } = useAuth();
   const classes = useStyles();
   return (
-    <>
-      <Typography variant="h2" className={classes.bold}>
+    <div className={classes.root}>
+      <Typography variant="h2" className={classes.responsiveBold}>
         {`Hey ${currentUser.email}, welcome!`}
       </Typography>
       <Button
@@ -58,16 +65,10 @@ const HomeData = ({ handleOpen, recipeList }) => {
         )
         : (
           <div className={classes.recipeContainer}>
-            {recipeList.map((recipe) => (
-              <Card key={recipe.name} className={classes.recipeCard}>
-                <Typography variant="h4" className={classes.bold}>
-                  {recipe.name}
-                </Typography>
-              </Card>
-            ))}
+            {recipeList.map((recipe) => <RecipeBubble key={recipe.name} recipe={recipe} />)}
           </div>
         )}
-    </>
+    </div>
   );
 };
 

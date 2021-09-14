@@ -9,6 +9,9 @@ import AddRecipe from './AddRecipe';
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(12),
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(2),
+    },
   },
 }));
 
