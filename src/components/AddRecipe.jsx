@@ -3,17 +3,17 @@ import {
   Button,
   Grid,
   IconButton,
-  makeStyles,
   Toolbar,
   Typography,
   TextField,
   CircularProgress,
   Snackbar,
-} from '@material-ui/core';
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import PropTypes from 'prop-types';
-import CloseIcon from '@material-ui/icons/Close';
+import CloseIcon from '@mui/icons-material/Close';
 import React, { useState } from 'react';
-import Alert from '@material-ui/lab/Alert';
+import Alert from '@mui/lab/Alert';
 import { database } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
 import { capitalize } from '../helper';
@@ -92,7 +92,7 @@ const AddRecipe = (props) => {
     <>
       <AppBar color="primary" className={classes.appbar}>
         <Toolbar>
-          <IconButton onClick={handleClose} className={classes.appBarItem}>
+          <IconButton onClick={handleClose} className={classes.appBarItem} size="large">
             <CloseIcon color="inherit" />
           </IconButton>
           <Typography className={classes.heading} variant="h6">Add Recipe</Typography>

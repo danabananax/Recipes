@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRouteMatch, Route, Switch } from 'react-router-dom';
-import { Grid, makeStyles } from '@material-ui/core';
+import { Grid } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import Signup from './Signup';
 import Login from './Login';
 
@@ -10,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     margin: 0,
     minHeight: '100vh',
     maxWidth: '100%',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       padding: 0,
     },
     [theme.breakpoints.up('sm')]: {
@@ -18,29 +19,23 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   item: {
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       width: '90%',
     },
     width: '700px',
   },
   paper: {
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       padding: 0,
     },
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(4),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       height: '70%',
     },
     display: 'flex',
     justifyContent: 'center',
-  },
-  form: {
-    display: 'flex',
-    width: '100%',
-    padding: theme.spacing(2),
-    margin: 0,
   },
 }));
 
@@ -65,16 +60,14 @@ const Auth = () => {
         <div
           className={classes.paper}
         >
-          <form className={classes.form}>
-            <Switch>
-              <Route path={`${path}/login`}>
-                <Login />
-              </Route>
-              <Route path={`${path}/signup`}>
-                <Signup />
-              </Route>
-            </Switch>
-          </form>
+          <Switch>
+            <Route path={`${path}/login`}>
+              <Login />
+            </Route>
+            <Route path={`${path}/signup`}>
+              <Signup />
+            </Route>
+          </Switch>
         </div>
       </Grid>
     </Grid>

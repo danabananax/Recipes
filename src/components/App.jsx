@@ -5,7 +5,8 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
-import { ThemeProvider } from '@material-ui/styles';
+import { ThemeProvider } from '@mui/styles';
+import { StyledEngineProvider } from '@mui/material/styles';
 import Auth from './auth/Auth';
 import Dashboard from './Dashboard';
 import {
@@ -19,19 +20,21 @@ const App = () => {
 
   return (
     <AuthProvider>
-      <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          {auth?.currentUser ? <Dashboard /> : <Redirect to="/auth/signup" />}
-          <Switch>
-            <Route path="/auth">
-              <Auth />
-            </Route>
-            <Route path="/home">
-              <Dashboard />
-            </Route>
-          </Switch>
-        </BrowserRouter>
-      </ThemeProvider>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <BrowserRouter>
+            {auth?.currentUser ? <Dashboard /> : <Redirect to="/auth/login" />}
+            <Switch>
+              <Route path="/auth">
+                <Auth />
+              </Route>
+              <Route path="/home">
+                <Dashboard />
+              </Route>
+            </Switch>
+          </BrowserRouter>
+        </ThemeProvider>
+      </StyledEngineProvider>
     </AuthProvider>
   );
 };

@@ -2,15 +2,15 @@ import React from 'react';
 import {
   Typography,
   Button,
-  makeStyles,
-} from '@material-ui/core';
+} from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
 import { useAuth } from '../contexts/AuthContext';
 import RecipeBubble from './RecipeBubble';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       padding: '2em',
       textAlign: 'center',
     },
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   recipeContainer: {
     display: 'flex',
     flexFlow: 'row wrap',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       flexFlow: 'column nowrap',
       alignItems: 'center',
     },

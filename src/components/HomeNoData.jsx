@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, makeStyles, Typography } from '@material-ui/core';
+import { Button, makeStyles, Typography } from '@mui/material';
 import { useAuth } from '../contexts/AuthContext';
 
 const useStyles = makeStyles((theme) => ({

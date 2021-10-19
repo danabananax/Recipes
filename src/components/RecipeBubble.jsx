@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { Card, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
     marginRight: theme.spacing(2),
     padding: theme.spacing(3),
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       marginRight: 0,
       marginBottom: theme.spacing(2),
       textAlign: 'center',
@@ -31,7 +31,10 @@ const RecipeBubble = (props) => {
 };
 
 RecipeBubble.propTypes = {
-  recipe: PropTypes.objectOf(PropTypes.string || PropTypes.number).isRequired,
+  recipe: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    ingredients: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
 };
 
 export default RecipeBubble;
