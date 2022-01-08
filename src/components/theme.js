@@ -1,13 +1,11 @@
-import { createTheme } from '@mui/material';
+import { createTheme } from '@mui/material/styles';
 
-import { adaptV4Theme } from '@mui/material/styles';
-
-const theme = createTheme(adaptV4Theme({
+const customTheme = createTheme(({
   palette: {
     primary: {
-      main: '#601edb',
-      light: '#9952ff',
-      dark: '#1500a8',
+      main: '#4caf50',
+      light: '#80e27e',
+      dark: '#087f23',
     },
     secondary: {
       main: '#f5f5f5',
@@ -25,4 +23,4 @@ const theme = createTheme(adaptV4Theme({
   },
 }));
 
-export default theme;
+export default customTheme;

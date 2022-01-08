@@ -1,4 +1,5 @@
-import { makeStyles, Dialog, CircularProgress } from '@material-ui/core';
+import { Dialog, CircularProgress } from '@mui/material';
+import { styled } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
@@ -6,13 +7,8 @@ import { database } from '../firebase';
 import HomeData from './HomeData';
 import AddRecipe from './AddRecipe';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: theme.spacing(12),
-    [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(2),
-    },
-  },
+const DashboardContainer = styled('div')(({ theme }) => ({
+  padding: theme.spacing(3),
 }));
 
 const Dashboard = () => {
@@ -20,7 +16,6 @@ const Dashboard = () => {
   const [recipeList, setRecipeList] = useState(); // list of recipe objects
   const [open, setOpen] = useState(false);
   const [loadingData, setLoadingData] = useState(true);
-  const classes = useStyles();
 
   const handleClose = () => { setOpen(false); };
   const handleOpen = () => { setOpen(true); };
@@ -33,18 +28,20 @@ const Dashboard = () => {
       if (!snapshot.exists()) {
         setRecipeList([]);
         setLoadingData(false);
-        return;
+      } else {
+        setRecipeList(Object.values(snapshot.val()));
+        setLoadingData(false);
       }
-      setRecipeList(Object.values(snapshot.val()));
-      setLoadingData(false);
     });
 
     return () => { userRecipesRef.off('value', listener); };
   }, [loadingUser, currentUser]);
 
-  return currentUser === null ? <Redirect to="/auth/login" /> : (
-    /* eslint-disable no-nested-ternary */
-    <div className={classes.root}>
+  if (currentUser === null) {
+    return <Redirect to="auth/login" />;
+  }
+  return (
+    <DashboardContainer>
       {!loadingData
         ? (
           <HomeData
@@ -63,7 +60,7 @@ const Dashboard = () => {
           handleClose={handleClose}
         />
       </Dialog>
-    </div>
+    </DashboardContainer>
   );
 };
 

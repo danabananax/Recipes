@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     margin: theme.spacing(2),
+    color: theme.palette.primary.main,
   },
 }));
 
@@ -21,10 +22,20 @@ const HomeNoData = (props) => {
       <Typography variant="h3" className={classes.header}>
         Woops, looks like you don&apos;t have any recipes yet.
       </Typography>
-      <Button className={classes.button} onClick={handleOpen} size="large" variant="contained" color="primary">
+      <Button
+        className={classes.button}
+        onClick={handleOpen}
+        size="large"
+        variant="contained"
+      >
         Add recipe
       </Button>
-      <Button className={classes.button} onClick={signout} size="large" variant="outlined">
+      <Button
+        className={classes.button}
+        onClick={signout}
+        size="large"
+        variant="outlined"
+      >
         Signout
       </Button>
     </>
