@@ -14,9 +14,9 @@ import PropTypes from 'prop-types';
 import CloseIcon from '@mui/icons-material/Close';
 import React, { useState } from 'react';
 import Alert from '@mui/lab/Alert';
-import { database } from '../firebase';
-import { useAuth } from '../contexts/AuthContext';
-import { capitalize } from '../helper';
+import { database } from '../../firebase';
+import { useAuth } from '../../contexts/AuthContext';
+import { capitalize } from '../../helper';
 
 const useStyles = makeStyles((theme) => ({
   appbar: {

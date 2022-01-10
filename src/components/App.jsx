@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import { ThemeProvider } from '@mui/system';
 import Auth from './auth/Auth';
-import Dashboard from './Dashboard';
+import Dashboard from './Dashboard/Dashboard';
 import {
   AuthProvider,
   useAuth,

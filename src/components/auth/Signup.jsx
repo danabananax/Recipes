@@ -68,6 +68,7 @@ const Signup = () => {
           <TextField
             label="Password"
             onChange={onChange}
+            type="password"
             value={value}
             sx={{ my: 2 }}
           />
@@ -86,6 +87,7 @@ const Signup = () => {
           <TextField
             label="Confirm Password"
             onChange={onChange}
+            type="password"
             value={value}
             sx={{ mb: 2 }}
           />

@@ -70,6 +70,7 @@ const Login = () => {
             label="Password"
             onChange={onChange}
             value={value}
+            type="password"
             sx={{ my: 2 }}
           />
         )}
