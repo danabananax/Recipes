@@ -7,12 +7,13 @@ import {
 } from 'react-router-dom';
 import { ThemeProvider } from '@mui/system';
 import Auth from './auth/Auth';
-import Dashboard from './Dashboard/Dashboard';
 import {
   AuthProvider,
   useAuth,
 } from '../contexts/AuthContext';
 import customTheme from './theme';
+import Dashboard from './Dashboard/Dashboard';
+import AddRecipeParent from './AddRecipe/AddRecipeParent';
 
 const App = () => {
   const auth = useAuth();
@@ -28,6 +29,9 @@ const App = () => {
             </Route>
             <Route path="/home">
               <Dashboard />
+            </Route>
+            <Route path="/add-recipe">
+              <AddRecipeParent />
             </Route>
           </Switch>
         </BrowserRouter>
