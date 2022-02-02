@@ -60,7 +60,7 @@ const HomeData = ({ loadingUser, currentUser }) => {
 };
 
 HomeData.propTypes = {
-  currentUser: PropTypes.arrayOf(PropTypes.object).isRequired,
+  currentUser: PropTypes.objectOf(PropTypes.string).isRequired,
   loadingUser: PropTypes.bool.isRequired,
 };
 

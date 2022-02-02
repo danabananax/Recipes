@@ -26,11 +26,17 @@ const StepContainer = styled('div')({
 const AddRecipeParent = () => {
   const [step, setStep] = useState(1);
   const [recipeName, setRecipeName] = useState('');
-  // const [ingredients, setIngredients] = useState({});
-  // const [method, setMethod] = useState([]);
+  const [ingredients, setIngredients] = useState({});
+  const [method, setMethod] = useState([]);
 
-  const incrementStep = () => setStep(step + 1);
-  const decrementStep = () => setStep(step - 1);
+  const incrementStep = (event) => {
+    event.preventDefault();
+    setStep(step + 1);
+  };
+  const decrementStep = (event) => {
+    event.preventDefault();
+    setStep(step - 1);
+  };
 
   return (
     <AddRecipeContainer>
@@ -40,9 +46,27 @@ const AddRecipeParent = () => {
         step={step}
       />
       <StepContainer>
-        { step === 1 && <AddName setRecipeName={setRecipeName} recipeName={recipeName} /> }
-        { step === 2 && <AddIngredients recipeName={recipeName} /> }
-        { step === 3 && <AddMethod recipeName={recipeName} /> }
+        { step === 1 && (
+          <AddName
+            setRecipeName={setRecipeName}
+            recipeName={recipeName}
+            incrementStep={incrementStep}
+          />
+        ) }
+        { step === 2 && (
+          <AddIngredients
+            recipeName={recipeName}
+            ingredients={ingredients}
+            setIngredients={setIngredients}
+          />
+        ) }
+        { step === 3 && (
+          <AddMethod
+            recipeName={recipeName}
+            method={method}
+            setMethod={setMethod}
+          />
+        ) }
       </StepContainer>
     </AddRecipeContainer>
   );

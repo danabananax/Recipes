@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TextField, Typography } from '@mui/material';
 
-const AddName = ({ setRecipeName, recipeName }) => (
-  <>
+const AddName = ({ setRecipeName, recipeName, incrementStep }) => (
+  <form onSubmit={incrementStep}>
     <Typography variant="h4" sx={{ pb: 4 }}>
       Enter Recipe Name
     </Typography>
@@ -14,12 +14,13 @@ const AddName = ({ setRecipeName, recipeName }) => (
       onChange={(event) => setRecipeName(event.target.value)}
       value={recipeName}
     />
-  </>
+  </form>
 );
 
 AddName.propTypes = {
   setRecipeName: PropTypes.func.isRequired,
   recipeName: PropTypes.string.isRequired,
+  incrementStep: PropTypes.func.isRequired,
 };
 
 export default AddName;
