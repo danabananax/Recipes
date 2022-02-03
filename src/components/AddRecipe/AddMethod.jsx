@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { TextField, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
+
 
 const AddMethod = ({ recipeName, method, setMethod }) => {
   const [tempMethod, setTempMethod] = useState('');
@@ -8,10 +10,22 @@ const AddMethod = ({ recipeName, method, setMethod }) => {
   const submitMethod = (e) => {
     e.preventDefault();
     setMethod([...method, tempMethod]);
+    setTempMethod('');
   };
 
+  const MethodForm = styled('form')({
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  });
+
+  const MethodMapContainer = styled('div')({
+    width: '300px',
+    marginTop: '2em',
+  });
+
   return (
-    <form onSubmit={submitMethod}>
+    <MethodForm onSubmit={submitMethod}>
       <Typography variant="h4" sx={{ pb: 2 }}>
         {recipeName}
       </Typography>
@@ -24,14 +38,19 @@ const AddMethod = ({ recipeName, method, setMethod }) => {
         value={tempMethod}
         onChange={(e) => setTempMethod(e.target.value)}
         autoFocus
-        multiline
       />
-      {method.map((methodStep, idx) => (
-        <Typography variant="h7" key={methodStep}>
-          {`${idx + 1}, methodStep`}
-        </Typography>
-      ))}
-    </form>
+      <MethodMapContainer>
+         {method.map((methodStep, idx) => (
+            <Typography 
+              variant="h6" 
+              key={methodStep} 
+              align="left"
+            >
+              {`${idx + 1}. ${methodStep}`}
+            </Typography>
+        ))}
+      </MethodMapContainer>
+    </MethodForm>
   );
 };
 

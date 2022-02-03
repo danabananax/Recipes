@@ -25,6 +25,9 @@ const AddIngredients = ({ recipeName, ingredients, setIngredients }) => {
       ...ingredients,
       ...tempPair,
     });
+    // resets the fields
+    setTempIngredient("");
+    setTempQuantity("");
   };
 
   return (
@@ -52,7 +55,10 @@ const AddIngredients = ({ recipeName, ingredients, setIngredients }) => {
           onChange={(e) => setTempQuantity(e.target.value)}
         />
       </SpaceBetweenContainer>
-      <Button onClick={submitIngredients} variant="contained" sx={{ my: 2 }}>
+      <Button 
+        onClick={submitIngredients} 
+        variant="contained"
+        sx={{ my: 2 }}>
         Submit
       </Button>
       <IngredientContainer>
@@ -74,3 +80,4 @@ AddIngredients.propTypes = {
 };
 
 export default AddIngredients;
+export {SpaceBetweenContainer};

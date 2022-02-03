@@ -4,6 +4,7 @@ import AddRecipeAppBar from './AddRecipeAppBar';
 import AddName from './AddName';
 import AddIngredients from './AddIngredients';
 import AddMethod from './AddMethod';
+import Confirm from './Confirm';
 
 const AddRecipeContainer = styled('div')(({ theme }) => ({
   padding: theme.spacing(16),
@@ -67,6 +68,13 @@ const AddRecipeParent = () => {
             setMethod={setMethod}
           />
         ) }
+        { step === 4 && (
+          <Confirm
+            recipeName={recipeName}
+            recipeIngredients={ingredients}
+            recipeMethod={method}
+          />
+        )}
       </StepContainer>
     </AddRecipeContainer>
   );
