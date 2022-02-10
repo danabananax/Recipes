@@ -44,7 +44,7 @@ const AddMethod = ({ recipeName, method, setMethod }) => {
             <Typography 
               variant="h6" 
               key={methodStep} 
-              align="left"
+              align="justify"
             >
               {`${idx + 1}. ${methodStep}`}
             </Typography>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Typography, Button } from '@mui/material';
+import { Typography, Button, Snackbar } from '@mui/material';
 import { styled } from '@mui/system';
 import { SpaceBetweenContainer } from './AddIngredients';
 import { database } from '../../firebase';
@@ -13,7 +13,10 @@ const RecipeDataContainer = styled('div')({
 const Confirm = ({ recipeIngredients, recipeName, recipeMethod }) => {
     const { currentUser } = useAuth();
 
-    const [recipeSubmitted, setRecipeSubmitted] = useState(false)
+    const [recipeSubmitted, setRecipeSubmitted] = useState(false);
+    const [successMsgOpen, setSuccessMsgOpen] = useState(false);
+
+    const handleClose = () => setSuccessMsgOpen(false);
 
     const submitRecipe = () => {
         const userDataRef = database.ref('users/' + currentUser.uid)
@@ -24,7 +27,10 @@ const Confirm = ({ recipeIngredients, recipeName, recipeMethod }) => {
             ingredients: recipeIngredients,
         });
 
-        newRecipeRef.once('value').then(setRecipeSubmitted(true));
+        newRecipeRef.once('value').then(() => {
+            setRecipeSubmitted(true);
+            setSuccessMsgOpen(true);
+        });
     }
  
     return (
@@ -52,6 +58,7 @@ const Confirm = ({ recipeIngredients, recipeName, recipeMethod }) => {
                 variant="h5" 
                 key={recipeStep} 
                 gutterBottom
+                align='justify'
                 >
                    {`${idx+1}. ${recipeStep}`}
                </Typography>
@@ -66,6 +73,12 @@ const Confirm = ({ recipeIngredients, recipeName, recipeMethod }) => {
        >
            Confirm
        </Button>
+       <Snackbar
+        open={successMsgOpen}
+        autoHideDuration={2000}
+        onClose={handleClose}
+        message="Successfully added recipe."
+       />
     </>
 )};
 
