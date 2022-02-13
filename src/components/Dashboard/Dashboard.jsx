@@ -8,7 +8,19 @@ import AddRecipeBtn from './AddRecipeBtn';
 import HomeData from './HomeData';
 
 const DashboardContainer = styled('div')(({ theme }) => ({
-  padding: theme.spacing(8),
+  
+  [theme.breakpoints.up('lg')]: {
+    padding: theme.spacing(12),
+  },
+  [theme.breakpoints.down('lg')]: {
+    padding: theme.spacing(8)
+  },
+  [theme.breakpoints.down('md')]: {
+    padding: theme.spacing(4)
+  },
+  [theme.breakpoints.down('sm')]: {
+    padding: theme.spacing(2)
+  }
 }));
 
 const Dashboard = () => {

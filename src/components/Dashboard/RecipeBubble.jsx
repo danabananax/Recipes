@@ -1,40 +1,31 @@
 import React from 'react';
-import { Card, Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { Button, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 
-const useStyles = makeStyles((theme) => ({
-  recipeCard: {
-    marginTop: theme.spacing(2),
-    marginRight: theme.spacing(2),
-    padding: theme.spacing(3),
-    [theme.breakpoints.down('md')]: {
-      marginRight: 0,
-      marginBottom: theme.spacing(2),
-      textAlign: 'center',
-      width: '100%',
-    },
-
+const RecipeButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.secondary.contrastText,
+  backgroundColor: theme.palette.secondary.main,
+  '&:hover': {
+    backgroundColor: theme.palette.secondary.dark,
   },
-}));
+  '&:active': {
+    backgroundColor: theme.palette.secondary.main,
+  }
+}))
 
-const RecipeBubble = (props) => {
-  const classes = useStyles();
-  const { recipe } = props;
+const RecipeBubble = ({ name }) => {
   return (
-    <Card key={recipe.name} className={classes.recipeCard}>
-      <Typography variant="h4" className={classes.bold}>
-        {recipe.name}
+    <RecipeButton sx={{ p: 4, mr: 4, mt: 4 }} variant="contained">
+      <Typography variant="h4">
+        {name}
       </Typography>
-    </Card>
+    </RecipeButton>
   );
 };
 
 RecipeBubble.propTypes = {
-  recipe: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    ingredients: PropTypes.arrayOf(PropTypes.string),
-  }).isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 export default RecipeBubble;

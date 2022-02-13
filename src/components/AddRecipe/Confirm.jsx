@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import { Typography, Button, Snackbar } from '@mui/material';
 import { styled } from '@mui/system';
-import { SpaceBetweenContainer } from './AddIngredients';
 import { database } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
+import { SpaceBetweenContainer } from './AddIngredients';
+
 
 const RecipeDataContainer = styled('div')({
     width: '350px',
@@ -32,7 +34,8 @@ const Confirm = ({ recipeIngredients, recipeName, recipeMethod }) => {
             setSuccessMsgOpen(true);
         });
     }
- 
+    if(recipeSubmitted) return <Redirect to="/home" />;
+
     return (
     <>
         <Typography variant="h2" gutterBottom>
@@ -78,9 +81,13 @@ const Confirm = ({ recipeIngredients, recipeName, recipeMethod }) => {
         autoHideDuration={2000}
         onClose={handleClose}
         message="Successfully added recipe."
+        anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center'
+        }}
        />
     </>
-)};
+)}; 
 
 Confirm.propTypes = {
   recipeName: PropTypes.string.isRequired,

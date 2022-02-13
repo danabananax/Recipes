@@ -1,6 +1,6 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
-const customTheme = createTheme(({
+let customTheme = createTheme(({
   palette: {
     primary: {
       main: '#4caf50',
@@ -13,14 +13,8 @@ const customTheme = createTheme(({
       dark: '#c2c2c2',
     },
   },
-  typography: {
-    h2: {
-      fontSize: '3.75rem',
-      '@media (max-width: 876px)': {
-        fontSize: '2.5rem',
-      },
-    },
-  },
 }));
+
+customTheme = responsiveFontSizes(customTheme);
 
 export default customTheme;

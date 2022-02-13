@@ -26,10 +26,10 @@ const AddMethod = ({ recipeName, method, setMethod }) => {
 
   return (
     <MethodForm onSubmit={submitMethod}>
-      <Typography variant="h4" sx={{ pb: 2 }}>
+      <Typography variant="h3" sx={{ pb: 2 }}>
         {recipeName}
       </Typography>
-      <Typography variant="h7" sx={{ mb: 4 }}>
+      <Typography variant="h4" sx={{ mb: 4 }}>
         Method
       </Typography>
       <TextField

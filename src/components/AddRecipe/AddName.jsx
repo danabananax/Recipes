@@ -4,7 +4,7 @@ import { TextField, Typography } from '@mui/material';
 
 const AddName = ({ setRecipeName, recipeName, incrementStep }) => (
   <form onSubmit={incrementStep}>
-    <Typography variant="h4" sx={{ pb: 4 }}>
+    <Typography variant="h3" sx={{ pb: 4 }}>
       Enter Recipe Name
     </Typography>
     <TextField

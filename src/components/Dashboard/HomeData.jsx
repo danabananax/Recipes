@@ -9,7 +9,6 @@ import NoDataText from './NoDataText';
 const useStyles = makeStyles((theme) => ({
   root: {
     [theme.breakpoints.down('md')]: {
-      padding: '2em',
       textAlign: 'center',
     },
   },
@@ -33,7 +32,7 @@ const HomeData = ({ loadingUser, currentUser }) => {
     const userRecipesRef = database.ref(`users/${currentUser.uid}`); // list of user-made recipes
     const listener = userRecipesRef.on('value', (snapshot) => {
       if (snapshot.exists()) {
-        setRecipeList(Object.values(snapshot.val()));
+        setRecipeList(snapshot.val());
         setLoadingData(false);
       } else {
         setRecipeList([]);
@@ -52,7 +51,7 @@ const HomeData = ({ loadingUser, currentUser }) => {
         ? <NoDataText />
         : (
           <div className={classes.recipeContainer}>
-            {recipeList.map((recipe) => <RecipeBubble key={recipe.name} recipe={recipe} />)}
+            {Object.keys(recipeList).map((recipeId) => <RecipeBubble key={recipeId} name={recipeList[recipeId].name}/>)}
           </div>
         )}
     </div>

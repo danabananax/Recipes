@@ -12,22 +12,25 @@ const AddRecipeAppBar = ({ incrementStep, decrementStep, step }) => (
       <IconButton component={Link} to="/home" size="large">
         <CloseIcon />
       </IconButton>
-      <Typography variant="h5" sx={{ flexGrow: 1, textAlign: 'left', pl: 2 }}>
+      <Typography variant="h4" sx={{ flexGrow: 1, textAlign: 'left', pl: 2 }}>
         Add Recipe
       </Typography>
       <Button
         onClick={decrementStep}
         disabled={step < 2}
-        size="large"
       >
-        Back
+        <Typography variant="h5">
+          Back
+        </Typography>
       </Button>
       <Button
         onClick={incrementStep}
         disabled={step > 3}
-        size="large"
+        sx={{ mx: 4 }}
       >
-        Next
+        <Typography variant="h5">
+          Next
+        </Typography>
       </Button>
     </Toolbar>
   </AppBar>
