@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles';
 import { CircularProgress } from '@mui/material';
 import PropTypes from 'prop-types';
 import { database } from '../../firebase';
-import RecipeBubble from './RecipeBubble';
+import RecipeButton from './RecipeButton';
 import NoDataText from './NoDataText';
 
 const useStyles = makeStyles((theme) => ({
@@ -51,7 +51,12 @@ const HomeData = ({ loadingUser, currentUser }) => {
         ? <NoDataText />
         : (
           <div className={classes.recipeContainer}>
-            {Object.keys(recipeList).map((recipeId) => <RecipeBubble key={recipeId} name={recipeList[recipeId].name}/>)}
+            {Object.keys(recipeList).map((recipeId) => (
+              <RecipeButton 
+                key={recipeId}
+                id={recipeId}
+                name={recipeList[recipeId].name}/>
+            ))}
           </div>
         )}
     </div>

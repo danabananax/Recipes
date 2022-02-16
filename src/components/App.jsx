@@ -14,6 +14,7 @@ import {
 import customTheme from './theme';
 import Dashboard from './Dashboard/Dashboard';
 import AddRecipeParent from './AddRecipe/AddRecipeParent';
+import ViewRecipeParent from './ViewRecipe/ViewRecipeParent';
 
 const App = () => {
   const auth = useAuth();
@@ -32,6 +33,9 @@ const App = () => {
             </Route>
             <Route path="/add-recipe">
               <AddRecipeParent />
+            </Route>
+            <Route path="/view-recipe/:id">
+              <ViewRecipeParent />
             </Route>
           </Switch>
         </BrowserRouter>

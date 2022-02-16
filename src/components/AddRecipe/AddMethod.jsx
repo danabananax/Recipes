@@ -19,7 +19,7 @@ const AddMethod = ({ recipeName, method, setMethod }) => {
     alignItems: 'center',
   });
 
-  const MethodMapContainer = styled('div')({
+  const MethodListContainer = styled('div')({
     width: '300px',
     marginTop: '2em',
   });
@@ -39,7 +39,7 @@ const AddMethod = ({ recipeName, method, setMethod }) => {
         onChange={(e) => setTempMethod(e.target.value)}
         autoFocus
       />
-      <MethodMapContainer>
+      <MethodListContainer>
          {method.map((methodStep, idx) => (
             <Typography 
               variant="h6" 
@@ -49,7 +49,7 @@ const AddMethod = ({ recipeName, method, setMethod }) => {
               {`${idx + 1}. ${methodStep}`}
             </Typography>
         ))}
-      </MethodMapContainer>
+      </MethodListContainer>
     </MethodForm>
   );
 };

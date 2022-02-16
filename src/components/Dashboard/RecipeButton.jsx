@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const RecipeButton = styled(Button)(({ theme }) => ({
+const ViewRecipeButton = styled(Button)(({ theme }) => ({
   color: theme.palette.secondary.contrastText,
   backgroundColor: theme.palette.secondary.main,
   '&:hover': {
@@ -14,18 +15,23 @@ const RecipeButton = styled(Button)(({ theme }) => ({
   }
 }))
 
-const RecipeBubble = ({ name }) => {
+const RecipeButton = ({ name, id }) => {
   return (
-    <RecipeButton sx={{ p: 4, mr: 4, mt: 4 }} variant="contained">
+    <ViewRecipeButton // Navigates to view page for clicked recipe
+      component={Link}
+      to={`/view-recipe/${id}`}
+      variant="contained"
+      sx={{ p: 4, mr: 4, mt: 4 }}
+    >
       <Typography variant="h4">
         {name}
       </Typography>
-    </RecipeButton>
+    </ViewRecipeButton>
   );
 };
 
-RecipeBubble.propTypes = {
+RecipeButton.propTypes = {
   name: PropTypes.string.isRequired,
 };
 
-export default RecipeBubble;
+export default RecipeButton;
