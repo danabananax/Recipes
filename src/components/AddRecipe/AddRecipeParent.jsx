@@ -24,7 +24,7 @@ const StepContainer = styled('div')({
   alignItems: 'center',
 });
 
-const AddRecipeParent = () => {
+const AddRecipeParent = ({ userId }) => {
   const [step, setStep] = useState(1);
   const [recipeName, setRecipeName] = useState('');
   const [ingredients, setIngredients] = useState({});
@@ -73,6 +73,7 @@ const AddRecipeParent = () => {
             recipeName={recipeName}
             recipeIngredients={ingredients}
             recipeMethod={method}
+            userId={userId}
           />
         )}
       </StepContainer>

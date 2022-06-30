@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
 import { CircularProgress } from '@mui/material';
 import PropTypes from 'prop-types';
-import { database } from '../../firebase';
+import { getDatabase, ref, onValue, off } from 'firebase/database';
 import RecipeButton from './RecipeButton';
 import NoDataText from './NoDataText';
 
@@ -22,15 +22,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const HomeData = ({ loadingUser, currentUser }) => {
+const HomeData = ({ currentUser }) => {
   const classes = useStyles();
   const [loadingData, setLoadingData] = useState(true);
   const [recipeList, setRecipeList] = useState(); // list of recipe objects
 
   useEffect(() => {
-    if (loadingUser || !currentUser) return {};
-    const userRecipesRef = database.ref(`users/${currentUser.uid}`); // list of user-made recipes
-    const listener = userRecipesRef.on('value', (snapshot) => {
+    const database = getDatabase();
+    const userRecipesRef = ref(database, `users/${currentUser.uid}`); // list of user-made recipes
+    const listener = onValue(userRecipesRef, (snapshot) => {
       if (snapshot.exists()) {
         setRecipeList(snapshot.val());
         setLoadingData(false);
@@ -39,9 +39,8 @@ const HomeData = ({ loadingUser, currentUser }) => {
         setLoadingData(false);
       }
     });
-    // removing listener on dismount
-    return () => { userRecipesRef.off('value', listener); };
-  }, [loadingUser, currentUser]);
+    return () => {off(listener)};
+  }, [currentUser]);
 
   if (loadingData) return <CircularProgress />;
 
@@ -64,8 +63,7 @@ const HomeData = ({ loadingUser, currentUser }) => {
 };
 
 HomeData.propTypes = {
-  currentUser: PropTypes.objectOf(PropTypes.string).isRequired,
-  loadingUser: PropTypes.bool.isRequired,
+  currentUser: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default HomeData;

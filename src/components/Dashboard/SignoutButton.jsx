@@ -1,12 +1,12 @@
 import React from 'react';
 import { Button, Typography } from '@mui/material';
-import { useAuth } from '../../contexts/AuthContext';
+import { auth } from '../../firebase';
+import { signOut } from 'firebase/auth';
 
 const SignoutButton = () => {
-  const { signout } = useAuth();
   return (
-    <Button onClick={signout} variant="outlined">
-      <Typography variant="h5">Signout</Typography>
+    <Button onClick={() => {signOut(auth)}} variant="outlined">
+      <Typography variant="h6">Signout</Typography>
     </Button>
   );
 };

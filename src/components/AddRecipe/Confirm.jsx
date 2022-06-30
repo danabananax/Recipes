@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { Typography, Button, Snackbar } from '@mui/material';
 import { styled } from '@mui/system';
-import { database } from '../../firebase';
-import { useAuth } from '../../contexts/AuthContext';
+import { getDatabase, ref, push, set, onValue } from 'firebase/database';
 import { SpaceBetweenContainer } from './AddIngredients';
 
 
@@ -12,29 +11,30 @@ const RecipeDataContainer = styled('div')({
     width: '350px',
 })
 
-const Confirm = ({ recipeIngredients, recipeName, recipeMethod }) => {
-    const { currentUser } = useAuth();
-
+const Confirm = ({ recipeIngredients, recipeName, recipeMethod, userId }) => {
     const [recipeSubmitted, setRecipeSubmitted] = useState(false);
     const [successMsgOpen, setSuccessMsgOpen] = useState(false);
 
     const handleClose = () => setSuccessMsgOpen(false);
 
     const submitRecipe = () => {
-        const userDataRef = database.ref('users/' + currentUser.uid)
-        const newRecipeRef = userDataRef.push();
-        newRecipeRef.set({
+        const database = getDatabase();
+        const userRecipeRef = ref(database, 'users/' + userId)
+        const newRecipeRef = push(userRecipeRef);
+        set(newRecipeRef, {
             name: recipeName,
             method: recipeMethod,
             ingredients: recipeIngredients,
-        });
-
-        newRecipeRef.once('value').then(() => {
+        })
+        .then(() => {
             setRecipeSubmitted(true);
             setSuccessMsgOpen(true);
+        })
+        .catch((error) => {
+            console.log(error);
         });
     }
-    if(recipeSubmitted) return <Redirect to="/home" />;
+    // if(recipeSubmitted) return <Redirect to="/home" />;
 
     return (
     <>

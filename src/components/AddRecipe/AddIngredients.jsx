@@ -64,8 +64,8 @@ const AddIngredients = ({ recipeName, ingredients, setIngredients }) => {
       <IngredientContainer>
         {Object.keys(ingredients).map((ingredient) => (
           <SpaceBetweenContainer key={ingredient}>
-            <div>{ingredient}</div>
-            <div>{ingredients[ingredient]}</div>
+            <Typography variant="h5">{ingredient}</Typography>
+            <Typography variant="h5">{ingredients[ingredient]}</Typography>
           </SpaceBetweenContainer>
         ))}
       </IngredientContainer>

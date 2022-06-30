@@ -6,7 +6,8 @@ import {
 import { Link, Redirect } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import { styled } from '@mui/material/styles';
-import { useAuth } from '../../contexts/AuthContext';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebase';
 
 const Form = styled('form')({
   display: 'flex',
@@ -17,15 +18,18 @@ const Form = styled('form')({
 const Login = () => {
   const { handleSubmit, control } = useForm();
   const [loginLoading, setLoginLoading] = useState(false);
+  const [userAuthenticated, setUserAuthenticated] = useState(false);
   // const classes = useStyles();
-  const { login, currentUser } = useAuth();
-
   const onSubmit = (data) => {
     setLoginLoading(true);
     // eslint-disable-next-line no-console
     console.log(data);
     // eslint-disable-next-line no-console
-    login(data.email, data.password)
+    signInWithEmailAndPassword(auth, data.email, data.password)
+      .then(() => {
+        setLoginLoading(false);
+        setUserAuthenticated(true);
+      })
       .catch((loginErr) => {
         setLoginLoading(false);
         // eslint-disable-next-line no-console
@@ -35,7 +39,7 @@ const Login = () => {
   // eslint-disable-next-line no-console
   const onError = (e) => console.log('submitErr', e);
 
-  return currentUser ? <Redirect to="/home" /> : (
+  return userAuthenticated ? <Redirect to="/home" /> : (
   // eslint-disable-next-line no-console
     <Form onSubmit={handleSubmit(onSubmit, onError)}>
       <Typography variant="h4" sx={{ pb: 2 }}>Login</Typography>

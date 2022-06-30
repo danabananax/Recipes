@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Typography } from '@mui/material';
 
 const DashboardWelcome = ({ userEmail }) => (
-  <Typography variant="h2">
+  <Typography variant="h1">
     {`Welcome, ${userEmail}`}
   </Typography>
 );

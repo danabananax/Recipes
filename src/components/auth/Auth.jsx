@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRouteMatch, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Signup from './Signup';
 import Login from './Login';
@@ -21,15 +21,13 @@ const AuthContainer = styled('div')(({ theme }) => ({
 }));
 
 const Auth = () => {
-  const { path } = useRouteMatch();
-
   return (
     <AuthContainer>
       <Switch>
-        <Route path={`${path}/login`}>
+        <Route path="/auth/login">
           <Login />
         </Route>
-        <Route path={`${path}/signup`}>
+        <Route path="auth/signup">
           <Signup />
         </Route>
       </Switch>
